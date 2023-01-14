@@ -1,0 +1,17 @@
+{
+    "application-name": "API Tempest",
+    "configuration-screen-card-1-title": "Postman collection",
+    "configuration-screen-card-1-subtitle": "Upload the postman collection",
+    "configuration-screen-card-1-input-label": "Postman collection URL",
+    "configuration-screen-card-1-button-label": "Upload a file directly",
+    "configuration-screen-card-2-title": "Environment variables",
+    "configuration-screen-card-2-subtitle": "Upload the Postman environment JSON",
+    "configuration-screen-card-2-button-label": "Upload environment file",
+    "configuration-screen-card-3-title": "Additional configuration",
+    "configuration-screen-card-3-subtitle": "Configure the run below",
+    "configuration-screen-card-3-input-label-1": "Simultaneous runs",
+    "configuration-screen-card-3-input-label-2": "Number of iterations per run",
+    "configuration-screen-card-3-input-label-3": "Ignore redirects",
+    "configuration-screen-button-label": "Confirm",
+    "or": "OR"
+}
