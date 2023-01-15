@@ -35,7 +35,7 @@ class SteppedCard extends StatelessWidget {
                 ),
                 Flexible(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         title,
