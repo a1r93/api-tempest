@@ -31,7 +31,7 @@ printf '%s\n' "${avar}"
 
 # Unit tests
 printf "\e[33;1m%s\e[0m\n" '=== Updating version number ==='
-sh $SCRIPT_DIR/increment-version.sh $SCRIPT_DIR/../pubspec.yaml
+sh $SCRIPT_DIR/../../scripts/increment-version.sh $SCRIPT_DIR/../../pubspec.yaml
 if [ $? -ne 0 ]; then
   printf "\e[31;1m%s\e[0m\n" '=== Error while incrementing version ==='
   pop_stash_files
