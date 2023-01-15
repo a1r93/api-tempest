@@ -14,3 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Git hooks
+
+chmod +x scripts/\*.sh && ./scripts/install-hooks.sh
+
+Avoid using the prehook: `git commit -m "test commit" --no-verify`
