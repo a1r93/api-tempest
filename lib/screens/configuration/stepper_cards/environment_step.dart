@@ -1,4 +1,5 @@
 import 'package:api_tempest/utils/helpers.dart';
+import 'package:api_tempest/widgets/file_picker_button.dart';
 import 'package:api_tempest/widgets/organisms/stepped_card.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +13,7 @@ class EnvironmentStep extends StatelessWidget {
         title: Helpers.translate(context, 'configuration-screen-card-2-title')!,
         subtitle: Helpers.translate(context, 'configuration-screen-card-2-subtitle')!,
         children: [
-          OutlinedButton(
-              onPressed: () {
-                print('hello');
-              },
-              child: Text(Helpers.translate(context, 'configuration-screen-card-2-button-label')!)),
+          FilePickerButton(label: Helpers.translate(context, 'configuration-screen-card-2-button-label')!),
         ]);
   }
 }
