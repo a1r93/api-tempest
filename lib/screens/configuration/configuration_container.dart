@@ -41,8 +41,9 @@ class ConfigurationContainer extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return Container(
+      constraints: BoxConstraints(maxWidth: width < 1440 ? 880 : 905.0),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: Theme.of(context).colorScheme.secondaryContainer,
         borderRadius: BorderRadius.all(Radius.circular(width >= 905 ? 24.0 : 0.0)),
       ),
       child: width < 905
@@ -55,37 +56,40 @@ class ConfigurationContainer extends StatelessWidget {
                 return configurationCards[index];
               },
             )
-          : Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  Flexible(
-                    child: Row(children: [
-                      Flexible(
-                        flex: 1,
-                        child: Column(children: const [
-                          CollectionStep(),
-                          SizedBox(height: 24.0),
-                          EnvironmentStep(),
-                        ]),
-                      ),
-                      const SizedBox(width: 24.0),
-                      Flexible(
-                        flex: 1,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            AdditionalConfigurationStep(),
-                          ],
+          : SingleChildScrollView(
+              child: Container(
+                height: 540.0,
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  children: [
+                    Flexible(
+                      child: Row(children: [
+                        Flexible(
+                          flex: 1,
+                          child: Column(children: const [
+                            CollectionStep(),
+                            SizedBox(height: 24.0),
+                            EnvironmentStep(),
+                          ]),
                         ),
-                      )
-                    ]),
-                  ),
-                  FilledButton(
-                    onPressed: () {},
-                    child: Text(Helpers.translate(context, 'configuration-screen-button-label')!),
-                  )
-                ],
+                        const SizedBox(width: 24.0),
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              AdditionalConfigurationStep(),
+                            ],
+                          ),
+                        )
+                      ]),
+                    ),
+                    FilledButton(
+                      onPressed: () {},
+                      child: Text(Helpers.translate(context, 'configuration-screen-button-label')!),
+                    )
+                  ],
+                ),
               ),
             ),
     );

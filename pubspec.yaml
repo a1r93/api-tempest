@@ -40,6 +40,9 @@ dependencies:
   path_provider: ^2.0.11
   sprintf: ^7.0.0
   connectivity: ^3.0.6
+  file_picker: ^5.2.5
+  shared_preferences: ^2.0.16
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
