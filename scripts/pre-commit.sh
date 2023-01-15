@@ -38,4 +38,6 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+git add pubspec.yaml
+
 pop_stash_files
