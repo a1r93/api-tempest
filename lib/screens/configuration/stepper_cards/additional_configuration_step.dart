@@ -23,9 +23,7 @@ class AdditionalConfigurationStep extends StatelessWidget {
                 DropdownMenuItem(value: 100, child: Text('100')),
               ],
               value: 1,
-              onChanged: (val) {
-                print('hello');
-              }),
+              onChanged: (val) {}),
           Dropdown(
               label: Helpers.translate(context, 'configuration-screen-card-3-input-label-2')!,
               items: const [
@@ -36,9 +34,7 @@ class AdditionalConfigurationStep extends StatelessWidget {
                 DropdownMenuItem(value: 100, child: Text('100')),
               ],
               value: 1,
-              onChanged: (val) {
-                print('hello');
-              }),
+              onChanged: (val) {}),
           Row(
             children: [
               Expanded(
@@ -51,9 +47,7 @@ class AdditionalConfigurationStep extends StatelessWidget {
               ),
               Switch(
                 value: true,
-                onChanged: (value) {
-                  print('hello');
-                },
+                onChanged: (value) {},
               ),
             ],
           )

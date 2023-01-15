@@ -1,7 +1,6 @@
 import 'package:api_tempest/screens/configuration/configuration_container.dart';
 import 'package:api_tempest/utils/helpers.dart';
 import 'package:api_tempest/utils/theme/dark_theme_provider.dart';
-import 'package:api_tempest/widgets/organisms/stepped_card.dart';
 import 'package:flutter/material.dart';
 import 'package:api_tempest/utils/extensions/list_extension.dart';
 import 'package:provider/provider.dart';

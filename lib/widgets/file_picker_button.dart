@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -22,11 +21,9 @@ class FilePickerButton extends StatelessWidget {
             File file = File(result.files.single.path!);
 
             try {
-              final contents = await file.readAsString();
-
-              print(jsonDecode(contents));
+              await file.readAsString();
             } catch (e) {
-              print(e);
+              rethrow;
             }
           }
         },
