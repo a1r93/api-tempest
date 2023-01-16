@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:api_tempest/utils/localizations.dart';
 import 'package:api_tempest/utils/logger/logger.dart';
 import 'package:connectivity/connectivity.dart';
@@ -34,5 +36,14 @@ class Helpers {
 
   static String camelCaseToKebabCase(String text) {
     return text.replaceAllMapped(RegExp(r'([A-Z])'), (Match m) => "-${m[1]!.toLowerCase()}").trim().substring(1);
+  }
+
+  static bool isValidJson(String json) {
+    try {
+      jsonDecode(json);
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

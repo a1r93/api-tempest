@@ -1,11 +1,27 @@
+import 'package:api_tempest/screens/configuration/configuration_form_handler.dart';
 import 'package:api_tempest/screens/configuration/stepper_cards/additional_configuration_step.dart';
 import 'package:api_tempest/screens/configuration/stepper_cards/collection_step.dart';
 import 'package:api_tempest/screens/configuration/stepper_cards/environment_step.dart';
 import 'package:api_tempest/utils/helpers.dart';
 import 'package:flutter/material.dart';
 
-class ConfigurationContainer extends StatelessWidget {
+class ConfigurationContainer extends StatefulWidget {
   const ConfigurationContainer({super.key});
+
+  @override
+  State<ConfigurationContainer> createState() => _ConfigurationContainerState();
+}
+
+class _ConfigurationContainerState extends State<ConfigurationContainer> {
+  final ConfigurationFormHandler _formHandler = ConfigurationFormHandler();
+
+  @override
+  void initState() {
+    super.initState();
+    _formHandler.addListener(() {
+      setState(() {});
+    });
+  }
 
   double _getPadding(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -23,7 +39,7 @@ class ConfigurationContainer extends StatelessWidget {
 
   List<Widget> _getCards(BuildContext context) {
     return [
-      const CollectionStep(),
+      CollectionStep(formHandler: _formHandler),
       const EnvironmentStep(),
       const AdditionalConfigurationStep(),
       Center(
@@ -66,10 +82,10 @@ class ConfigurationContainer extends StatelessWidget {
                       child: Row(children: [
                         Flexible(
                           flex: 1,
-                          child: Column(children: const [
-                            CollectionStep(),
-                            SizedBox(height: 24.0),
-                            EnvironmentStep(),
+                          child: Column(children: [
+                            CollectionStep(formHandler: _formHandler),
+                            const SizedBox(height: 24.0),
+                            const EnvironmentStep(),
                           ]),
                         ),
                         const SizedBox(width: 24.0),
@@ -93,5 +109,11 @@ class ConfigurationContainer extends StatelessWidget {
               ),
             ),
     );
+  }
+
+  @override
+  void dispose() {
+    _formHandler.dispose();
+    super.dispose();
   }
 }
