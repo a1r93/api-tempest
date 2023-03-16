@@ -1,10 +1,13 @@
+import 'package:api_tempest/screens/configuration/configuration_form_handler.dart';
 import 'package:api_tempest/utils/helpers.dart';
 import 'package:api_tempest/widgets/dropdown.dart';
 import 'package:api_tempest/widgets/organisms/stepped_card.dart';
 import 'package:flutter/material.dart';
 
 class AdditionalConfigurationStep extends StatelessWidget {
-  const AdditionalConfigurationStep({super.key});
+  final ConfigurationFormHandler formHandler;
+
+  const AdditionalConfigurationStep({required this.formHandler, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,10 @@ class AdditionalConfigurationStep extends StatelessWidget {
                 DropdownMenuItem(value: 25, child: Text('25')),
                 DropdownMenuItem(value: 100, child: Text('100')),
               ],
-              value: 1,
-              onChanged: (val) {}),
+              value: formHandler.nbParallelRequests.value,
+              onChanged: (value) {
+                formHandler.setValue('nbParallelRequests', value);
+              }),
           Dropdown(
               label: Helpers.translate(context, 'configuration-screen-card-3-input-label-2')!,
               items: const [
@@ -33,8 +38,10 @@ class AdditionalConfigurationStep extends StatelessWidget {
                 DropdownMenuItem(value: 25, child: Text('25')),
                 DropdownMenuItem(value: 100, child: Text('100')),
               ],
-              value: 1,
-              onChanged: (val) {}),
+              value: formHandler.nbIterations.value,
+              onChanged: (value) {
+                formHandler.setValue('nbIterations', value);
+              }),
           Row(
             children: [
               Expanded(
@@ -46,8 +53,10 @@ class AdditionalConfigurationStep extends StatelessWidget {
                 ),
               ),
               Switch(
-                value: true,
-                onChanged: (value) {},
+                value: formHandler.ignoreRedirects.value ?? false,
+                onChanged: (value) {
+                  formHandler.setValue('ignoreRedirects', value);
+                },
               ),
             ],
           )

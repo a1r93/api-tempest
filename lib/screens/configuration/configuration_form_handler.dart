@@ -1,7 +1,13 @@
-import 'package:api_tempest/utils/helpers.dart';
 import 'package:api_tempest/utils/logger/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+
+class JsonFile {
+  String? content;
+  String? path;
+
+  JsonFile({this.content, this.path});
+}
 
 class FormField<T> {
   T? value;
@@ -30,19 +36,8 @@ class ConfigurationFormHandler extends ChangeNotifier {
     return Uri.parse(value).isAbsolute ? null : 'Please enter a valid URL';
   });
 
-  FormField<String> collectionFileContent = FormField<String>(validator: (value) {
-    if (value == null || value.isEmpty) {
-      return null;
-    }
-    return Helpers.isValidJson(value) ? null : 'Please enter a valid JSON';
-  });
-
-  FormField<String> environmentVariables = FormField<String>(validator: (value) {
-    if (value == null || value.isEmpty) {
-      return null;
-    }
-    return Helpers.isValidJson(value) ? null : 'Please enter a valid JSON';
-  });
+  late FormField<JsonFile> collectionFileContent = FormField<JsonFile>();
+  late FormField<JsonFile> environmentVariables = FormField<JsonFile>();
 
   FormField<int> nbParallelRequests = FormField<int>();
   FormField<int> nbIterations = FormField<int>();
@@ -59,16 +54,20 @@ class ConfigurationFormHandler extends ChangeNotifier {
 
   void setValue(String property, dynamic value) {
     try {
-      String? error = getProperty(property)?.validator!(value);
-      if (error != null) {
-        setError(property, error);
-        return;
+      final propertyObject = getProperty(property);
+      if (propertyObject?.validator != null) {
+        String? error = propertyObject?.validator!(value);
+        if (error != null) {
+          setError(property, error);
+          return;
+        }
       }
+
       setError(property, null);
       getProperty(property)!.setValue(value);
     } catch (error, stackTrace) {
       _logger.e('An error occured when trying to set the value of $property, value: $value', error, stackTrace);
-      throw Exception("Invalid collectionUrl");
+      throw Exception("Invalid property");
     }
     notifyListeners();
   }
@@ -78,7 +77,7 @@ class ConfigurationFormHandler extends ChangeNotifier {
       getProperty(property)!.setError(error);
     } catch (error, stackTrace) {
       _logger.e('An error occured when trying to set an error for $property, error: $error', error, stackTrace);
-      throw Exception("Invalid collectionUrl");
+      throw Exception("Invalid property");
     }
     notifyListeners();
   }

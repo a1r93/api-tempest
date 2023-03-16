@@ -18,9 +18,16 @@ class _ConfigurationContainerState extends State<ConfigurationContainer> {
   @override
   void initState() {
     super.initState();
+    _initFormValues();
     _formHandler.addListener(() {
       setState(() {});
     });
+  }
+
+  void _initFormValues() {
+    _formHandler.nbIterations.value = 1;
+    _formHandler.nbParallelRequests.value = 1;
+    _formHandler.ignoreRedirects.value = true;
   }
 
   double _getPadding(BuildContext context) {
@@ -40,8 +47,8 @@ class _ConfigurationContainerState extends State<ConfigurationContainer> {
   List<Widget> _getCards(BuildContext context) {
     return [
       CollectionStep(formHandler: _formHandler),
-      const EnvironmentStep(),
-      const AdditionalConfigurationStep(),
+      EnvironmentStep(formHandler: _formHandler),
+      AdditionalConfigurationStep(formHandler: _formHandler),
       Center(
           child: FilledButton(
         onPressed: () {},
@@ -78,28 +85,26 @@ class _ConfigurationContainerState extends State<ConfigurationContainer> {
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   children: [
-                    Flexible(
-                      child: Row(children: [
-                        Flexible(
-                          flex: 1,
-                          child: Column(children: [
-                            CollectionStep(formHandler: _formHandler),
-                            const SizedBox(height: 24.0),
-                            const EnvironmentStep(),
-                          ]),
+                    Row(children: [
+                      Flexible(
+                        flex: 1,
+                        child: Column(children: [
+                          CollectionStep(formHandler: _formHandler),
+                          const SizedBox(height: 24.0),
+                          EnvironmentStep(formHandler: _formHandler),
+                        ]),
+                      ),
+                      const SizedBox(width: 24.0),
+                      Flexible(
+                        flex: 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            AdditionalConfigurationStep(formHandler: _formHandler),
+                          ],
                         ),
-                        const SizedBox(width: 24.0),
-                        Flexible(
-                          flex: 1,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              AdditionalConfigurationStep(),
-                            ],
-                          ),
-                        )
-                      ]),
-                    ),
+                      )
+                    ]),
                     FilledButton(
                       onPressed: () {},
                       child: Text(Helpers.translate(context, 'configuration-screen-button-label')!),

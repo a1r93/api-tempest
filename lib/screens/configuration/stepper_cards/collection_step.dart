@@ -30,7 +30,16 @@ class CollectionStep extends StatelessWidget {
             },
           ),
           Text(Helpers.translate(context, 'or')!, style: Theme.of(context).textTheme.titleMedium),
-          FilePickerButton(label: Helpers.translate(context, 'configuration-screen-card-1-button-label')!),
+          FilePickerButton(
+            label: Helpers.translate(context, 'configuration-screen-card-1-button-label')!,
+            selectedPath: formHandler.collectionFileContent.value?.path,
+            onSelect: (value, path) {
+              formHandler.setValue('collectionFileContent', value);
+            },
+            onError: (value) {
+              formHandler.setError('collectionFileContent', 'An error occured when reading the file');
+            },
+          ),
         ]);
   }
 }
